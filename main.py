@@ -1,12 +1,24 @@
+# About
+
+
+# Third party libraries
 import re
+
+# global variables
+Chinese_punctuation = '''  '''
+English_punctuation = '''  '''
+Alpha_string = ''' '''
+Digit_string = '''1234567890'''
+
 
 def read_tex(file):
     # open a tex file
     # return a string and ignore characters before '\begin{document}'
-    with open(file,'r',encoding = 'utf-8') as f:
+    with open(file, 'r', encoding='utf-8') as f:
         tex = f.read()
         index = re.search('begin{document}', tex, flags=0).span()
         return tex[index[1]:]
+
 
 def count_(tex):
     # input a string which read_tex() return
@@ -23,7 +35,8 @@ def count_(tex):
             nex_tex += i
     return len(nex_tex)
 
+
 if __name__ == '__main__':
-    file_name = ''
+    file_name = 'paper.tex'
     print('count:')
     print(count_(read_tex(file_name)))
