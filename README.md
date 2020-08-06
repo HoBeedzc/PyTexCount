@@ -17,6 +17,10 @@ Using Python to count the number of Chinese characters in LaTeX
 - 给出latex命令、字符统计信息、计算阅读时间
 - 利用深度学习及神经网络自动化编写摘要和关键词
 
+目前已实现功能：
+- 统计.tex正文的字符，其中不包括中文字符。
+- 统计.tex文件中使用的第三方程序包数目，并列出。(目前并未解决包含可选参数包名的统计)
+
 ## Why PyTexCount ?
 
 
