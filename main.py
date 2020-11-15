@@ -42,55 +42,64 @@ def extract_body(tex):
 def remove_whitespace(doc):
     #
     #
-    redoc = ''
-    for i in doc:
-        if i not in White_space or i == '\n':
-            redoc += i
+    redoc = doc.replace('\t', '    ').replace('    ', '')
     return redoc
 
 
-'''
-def process_header(header):
+def split_command(body):
+    # F
     #
-    # 
-    return
+    body_list = body.split()
+    command = []
+    character = []
+    for i in body_list:
+        ans = re.findall(r'\\+[a-zA-Z]*(?:\{?.*\}?\[?.*\]?|\[?.*\]?\{?.*\}?)',
+                         i, re.I)
+        if ans == []:
+            character.append(i)
+        else:
+            command.append(i)
+    return ' '.join(command), ' '.join(character)
 
 
-def process_body(body):
-    #
-    # 去掉制表符和空格
-    body = body.replace('\t','').replace(' ','')
-    return body
-
-
-def process_footer(footer):
-    #
-    #
-    return
-'''
-
-
-def count_(tex):
+def count_body_character(tex):
     # input a string which read_tex() return
     # return a int that the number of Chinese characters it includes
-    nex_tex = ''
-    '''
-    for i in tex:
-        if i in '!@#$%^&*(){}[]|\\;:",<.>/?\n-_=+；：’“，。？！（）【】、 \t':
-            pass
-        elif i in Alpha_string:
-            pass
-        elif i in Digit_string:
-            pass
+    tex = re.sub(r'[,：:，、\$\(\)（）【】]', r' ', tex)
+    tex = re.sub(r'[\s]+', r' ', tex)
+    sennum = 0
+    chanum = 0
+    chinum = 0
+    engnum = 0
+    dignum = 0
+    flag = 0
+    for i in range(len(tex)):
+        if tex[i] == '.' or i == '。':
+            flag = 0
+            sennum += 1
+        elif tex[i] in Alpha_string:
+            if flag == 1:
+                pass
+            else:
+                engnum += 1
+                flag = 1
+        elif tex[i] in Digit_string:
+            if flag == 2:
+                pass
+            else:
+                dignum += 1
+                flag = 2
+        elif tex[i] == ' ':
+            flag = 0
         else:
-            nex_tex += i
-    '''
-    f = open(r'testfile/content.txt', 'w')
-    for i in tex:
-        f.write(i)
-        # f.write('\n')
-    f.close()
-    return len(nex_tex)
+            flag = 0
+            chinum += 1
+    chanum = chinum + dignum + engnum
+    return chanum, sennum, chinum, engnum, dignum
+
+
+def count_body_command(tex):
+    pass
 
 
 def count_packages(tex_pre):
@@ -111,10 +120,20 @@ def main():
     tex = read_tex(file_name)
     header, body, footer = extract_body(tex)
     header, body, footer = map(remove_whitespace, [header, body, footer])
+    command, character = split_command(body)
     print('count:', end=' ')
-    print(count_(body))
+    print(count_body_character(character))
     print('used packages:', end=' ')
     print(count_packages(header))
+    with open(r'testfile/content.txt', 'w') as f:
+        for i in re.findall(
+                r'\\+[a-zA-Z]*(?:\{^\s*?\}\[^\s*?\]|\[^\s*?\]\{^\s*?\}|\{^\s*?\})?',
+                command, re.I):
+            f.write(i)
+            f.write('\n')
+        a = re.sub(r'\\+[a-zA-Z]*(?:\{^\s*?\}\[^\s*?\]|\[^\s*?\]\{^\s*?\})?',
+                   ' ', command)
+        f.write(re.sub(r'\s+', ' ', a))
 
 
 if __name__ == '__main__':
