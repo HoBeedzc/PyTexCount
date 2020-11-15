@@ -1,4 +1,5 @@
 # PyTexCount
+[![codebeat badge](https://codebeat.co/badges/54028854-7c45-4cd6-b1af-25842c2de1b5)](https://codebeat.co/projects/github-com-hobeedzc-pytexcount-master)
 
 ## What is PyTexCount ? 
 Using Python to count the number of Chinese characters in LaTeX
