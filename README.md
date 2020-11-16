@@ -6,6 +6,9 @@ Using Python to count the number of Chinese characters in LaTeX
 
 构想：
 
+复杂模式：
+
+
 四种形式，包括：
 - 形成标准 PyPi 第三方库
 - Python 脚本
@@ -21,6 +24,12 @@ Using Python to count the number of Chinese characters in LaTeX
 目前已实现功能：
 - 统计.tex正文的字符，其中不包括中文字符。
 - 统计.tex文件中使用的第三方程序包数目，并列出。(目前并未解决包含可选参数包名的统计)
+
+简单模式：
+
+如果要计算的.tex文件过于庞大，可使用简单模式进行字数统计。
+简单模式使用迭代器加载文件，不会对内存造成压力，并且处理庞大文件时也会拥有较好的性能。
+但由于使用了迭代器，功能上也会有所限制，目前仅可实现统计字数。
 
 ## Why PyTexCount ?
 
