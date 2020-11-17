@@ -26,6 +26,10 @@ class Tex:
     def body(self):
         return self._body
 
+    @body.setter
+    def body(self, new_body):
+        self._body = new_body
+
     @property
     def footer(self):
         return self._footer
@@ -51,7 +55,7 @@ class Tex:
             tex = f.read()
         return cls(tex)
 
-    def _extract_body(self):
+    def _extract_body(self) -> str:
         begin_index = re.search(r'\\begin{document}', self.tex, flags=0).span()
         end_index = re.search(r'\\end{document}', self.tex, flags=0).span()
         header = self.tex[:begin_index[0]]
@@ -80,3 +84,9 @@ class Tex:
         Display .tex file contents
         '''
         print(self)
+
+    def count(self):
+        '''
+        count charaters in the .tex file
+        '''
+        pass
