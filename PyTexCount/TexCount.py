@@ -1,4 +1,5 @@
 from .Tex import Tex
+import re
 
 
 class TexCount:
