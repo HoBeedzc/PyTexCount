@@ -46,3 +46,10 @@ def body_process(self: Tex):
     bp._remove_whitespace()
     bp._remove_punctuation()
     pass
+
+
+'''
+待完成需求：
+提取章节树 -> 生产json文件
+
+'''

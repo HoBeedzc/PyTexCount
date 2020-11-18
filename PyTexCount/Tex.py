@@ -48,7 +48,7 @@ class Tex:
         open a .tex file and reutrn a instance for class Tex.
         :param path: .tex file path
         :param encoding: Coding method of this .tex file
-        :return: None\n
+        :return: a instance for class Tex\n
         :sample: path = r'./sample.tex' encoding = 'utf-8'
         '''
         with open(path, 'r', encoding=encoding) as f:
