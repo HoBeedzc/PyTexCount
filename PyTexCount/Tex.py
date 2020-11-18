@@ -1,6 +1,10 @@
 import re
 
 
+class NotATexFileError(TypeError):
+    pass
+
+
 class Tex:
     '''
     '''
@@ -56,8 +60,17 @@ class Tex:
         return cls(tex)
 
     def _extract_body(self) -> str:
-        begin_index = re.search(r'\\begin{document}', self.tex, flags=0).span()
-        end_index = re.search(r'\\end{document}', self.tex, flags=0).span()
+        try:
+            begin_index = re.search(r'\\begin{document}', self.tex,
+                                    flags=0).span()
+        except AttributeError:
+            raise NotATexFileError(
+                r'Can not found \begin{document} in this file.')
+        try:
+            end_index = re.search(r'\\end{document}', self.tex, flags=0).span()
+        except AttributeError:
+            raise NotATexFileError(
+                r'Can not found \end{document} in this file.')
         header = self.tex[:begin_index[0]]
         body = self.tex[begin_index[0]:end_index[1]]
         footer = self.tex[end_index[1]:]
