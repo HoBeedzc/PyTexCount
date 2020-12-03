@@ -1,7 +1,12 @@
-# PyTexCount
-[![codebeat badge](https://codebeat.co/badges/54028854-7c45-4cd6-b1af-25842c2de1b5)](https://codebeat.co/projects/github-com-hobeedzc-pytexcount-master)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/HoBeedzc/PyTexCount)
-![GitHub](https://img.shields.io/github/license/HoBeedzc/PyTexCount)
+<h1 align='center'>
+  PyTexCount(LaTeX Word Count in Python)
+</h1>
+
+<div align='center'>
+  <img src='https://codebeat.co/badges/54028854-7c45-4cd6-b1af-25842c2de1b5' />
+  <img src='https://img.shields.io/github/languages/code-size/HoBeedzc/PyTexCount'/>
+  <img src='https://img.shields.io/github/license/HoBeedzc/PyTexCount'/>
+</div>
 
 ## What is PyTexCount ? 什么是PyTexCount？
 Using Python to count the number of Chinese characters in LaTeX.
